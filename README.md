@@ -10,7 +10,7 @@
 
 This lib was created in order to be able to easily encrypt things at compile time that would then be decrypted at runtime without any trouble.
 
-This lib does not implant a macro to do because random number generations (at some random generation) can only be done at **BUILD** time in rust, not **COMPILE** time.
+This lib does not implement a macro to do so because random number generations (at some random generation) can only be done at **BUILD** time in rust, not **COMPILE** time.
 So as this project is made to be used as a library the lib will be only be built once and so keys won't be generated at each build.
 That's why I've not included any macro to encrypt things at compile time in this project. However you may something like use the following:
 
@@ -35,7 +35,7 @@ macro_rules! ctencrypt {
         //
         // encrypt at compile time
         //
-        const CTX: $crate::Aes128CBC = $crate::Aes128CBC::new($crate::KEY, IV);
+        const CTX: const_aes::Aes128CBC = const_aes::Aes128CBC::new($crate::KEY, IV);
         const CIPHER: [u8; 16] = CTX.encrypt(&TEXT);
 
         //
