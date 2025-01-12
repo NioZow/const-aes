@@ -133,28 +133,6 @@ pub const fn key_schedule(key: &[u8; 16]) -> [[u8; 16]; 11] {
     keys
 }
 
-
-pub const fn str_to_bytes<const LENGTH: usize>(s: &str) -> [u8; LENGTH] {
-    //
-    // verify the string length at compile time
-    //
-    assert!(s.len() >= LENGTH, "String is shorter than LENGTH");
-
-    let mut arr = [0u8; LENGTH];
-    let bytes = s.as_bytes();
-    let mut i = 0;
-
-    //
-    // convert to bytes
-    //
-    while i < LENGTH {
-        arr[i] = bytes[i];
-        i += 1;
-    }
-
-    arr
-}
-
 #[cfg(test)]
 mod tests {
     use crate::utils::decrypt::{calculate_rsbox, mix_columns_rev, shift_rows_rev};

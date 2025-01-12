@@ -69,7 +69,7 @@ impl Aes128CBC {
                     if i < 16 {
                         block[k] ^= self.iv[k];
                     } else {
-                        block[k] ^= cipher[i - (16 - k)]
+                        block[k] ^= cipher[i + k - 31];
                     }
 
                     k += 1;
@@ -144,7 +144,7 @@ impl Aes128CBC {
                     if i < 16 {
                         plain[i - 15 + k] = block_enc[k] ^ self.iv[k];
                     } else {
-                        plain[i - 15 + k] = block_enc[i] ^ cipher[i - (16 - k)]
+                        plain[i + k - 15] = block_enc[k] ^ cipher[i + k - 31];
                     }
 
                     k += 1;
